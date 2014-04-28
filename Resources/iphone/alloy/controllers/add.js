@@ -5,10 +5,12 @@ function Controller() {
             item: $.itemField.value,
             done: 0
         });
-        todos.add(task);
-        task.save();
-        todos.fetch();
-        closeWindow();
+        if (task.validate()) {
+            todos.add(task);
+            task.save();
+            todos.fetch();
+            closeWindow();
+        } else alert("empty todo");
     }
     function focusTextField() {
         $.itemField.focus();

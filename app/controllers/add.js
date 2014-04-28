@@ -6,17 +6,22 @@ function addItem() {
         item : $.itemField.value,
         done : 0
     });
+    if( task.validate() ) {
+        
+        // add new model to the global collection
+        todos.add(task);    
+        
+        // save the model to persistent storage    
+        task.save();
 
-    // add new model to the global collection
-    todos.add(task);
+        // reload the tasks
+        todos.fetch();
 
-    // save the model to persistent storage
-    task.save();
-
-    // reload the tasks
-    todos.fetch();
-
-    closeWindow();
+        closeWindow();
+    } else {
+        alert('empty todo');
+    }
+    
 }
 
 function focusTextField() {
